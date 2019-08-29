@@ -1,0 +1,68 @@
+@import './_variable.less';
+
+.login-page {
+  box-sizing: border-box;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #fff;
+  .page-hd {
+    padding: .2rem 0;
+    text-align: center;
+  }
+  .page-bd {
+    padding: 0 .12rem 0;
+  }
+  .img-logo {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+  }
+  .input-container {
+    height: .44rem;
+    min-height: 0;
+    width: 100%;
+    margin: .1rem 0;
+    border-bottom: none;
+    border-radius: .05rem;
+    .mint-cell-wrapper,
+    input {
+      background-color: @white-light;
+      color: #000;
+      font-size: .13rem;
+    }
+  }
+  .mint-field-other {
+    margin-left: .2rem;
+    width: .2rem;
+  }
+  .btn-captcha {
+    background-color: transparent;
+    color: @blue;
+  }
+  .captcha-container {
+    .mint-field-other {
+      margin-right: -10px;
+      width: auto;
+    }
+    .mint-button {
+      font-size: .13rem;
+    }
+  }
+  .btn-to-forget {
+    display: block;
+    color: @orange;
+    margin-bottom: 25%;
+    font-size: .12rem;
+  }
+  .btn-to-login {
+    display: block;
+    color: @orange;
+    padding: .1rem 0;
+    font-size: .12rem;
+  }
+  .btn-login-plain {
+    color: @orange;
+    border-color: @orange;
+    font-size: .13rem;
+  }
+}

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, height=device-height, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <title>下载 - 红黑游戏</title>
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="红黑游戏">
+    <!-- Add to home screen for Windows -->
+    <meta name="msapplication-TileColor" content="#fc5155">
+    <style type="text/css">
+      html {
+        font-family: sans-serif;
+        font-size: 625%;
+        color: #444;
+      }
+      body {
+        font-size: 12px;
+        background: #fff;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .hide {
+        display: none !important;
+      }
+      .page-hd {
+        padding: .3rem 0;
+        text-align: center;
+      }
+      .hd-t img {
+        vertical-align: top;
+      }
+      .img-logo {
+        display: inline-block;
+        width: 48px;
+        height: 48px;
+      }
+      .title {
+        font-size: .3rem;
+        margin-left: .2rem;
+      }
+      .hd-b {
+        margin-top: .2rem;
+      }
+      .btn {
+        border: none;
+        outline: none;
+        background-color: #fff;
+        height: .4rem;
+        line-height: .4rem;
+      }
+      .btn-download {
+        color: #fff;
+        background-color: #3475b7;
+        border-radius: .05rem;
+        width: 50vw;
+        font-size: .16rem;
+      }
+      .card {
+        text-align: center;
+        padding: .2rem 15vw;
+      }
+      .card-bd {
+        border-bottom: 1px dashed #ddd;
+      }
+      .card-bd-title {
+        font-size: .16rem;
+        color: #d82f2f;
+        margin-bottom: .2rem;
+      }
+      .show-img {
+        max-width: 50vw;
+        height: auto;
+        margin-bottom: .3rem;
+        transition: all 2s;
+        opacity: 0;
+        transform: scale(0);
+      }
+      .move {
+        transform: scale(1);
+        opacity: 1;
+      }
+      .card-bd-info {
+        margin-bottom: .2rem;
+        font-size: .14rem;
+      }
+      .page-ft {
+        padding-bottom: .5rem;
+      }
+
+      .mask {
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        background: rgba(0, 0, 0, .8);
+      }
+      .mask img {
+        max-width: 100vw;
+        height: auto;
+      }
+    </style>
+  </head>
+
+  <body class="page">
+    <div class="page-hd">
+      <div class="hd-t">
+        <img src="img/logo1.png" class="img-logo">
+        <span class="title">红黑游戏</span>
+      </div>
+      <div class="hd-b">
+        <button type="button" class="btn btn-download">点击下载</button>
+      </div>
+    </div>
+
+    <div class="page-bd">
+      <section class="card">
+        <div class="card-bd">
+          <img src="img/first.png" class="show-img">
+          <p class="card-bd-info">红黑游戏，您的博彩交易管家</p>
+        </div>
+      </section>
+      <section class="card">
+        <div class="card-bd">
+          <p class="card-bd-title">实时查看股票行情</p>
+          <img src="img/second.png" class="show-img">
+        </div>
+      </section>
+      <section class="card">
+        <div class="card-bd">
+          <p class="card-bd-title">交易过程规范化、标准化和流程化</p>
+          <img src="img/third.png" class="show-img">
+        </div>
+      </section>
+      <section class="card">
+        <div class="card-bd">
+          <p class="card-bd-title">快捷查看往期战绩</p>
+          <img src="img/forth.png" class="show-img">
+        </div>
+      </section>
+      <section class="card">
+        <div class="card-bd">
+          <p class="card-bd-title">APP实时同步更新</p>
+          <img src="img/fifth.png" class="show-img">
+        </div>
+      </section>
+    </div>
+
+    <div class="page-ft card">
+      <p class="card-bd-info">更多操作，请下载APP查看</p>
+      <button type="button" class="btn btn-download">点击下载</button>
+    </div>
+
+    <!-- <router-link class="record-cell flex text-dynamic" :to="'/record-detail?id=' + item.oid" v-for="item in recordList" :key="item.oid">
+      <div class="flex-item text-dynamic" style="
+        flex: 0.8;
+    ">07-15</div>
+      <div class="flex-item text-dynamic">
+        <span class="red">大</span>
+      </div>
+      <div class="flex-item text-dynamic" style="
+        text-align: left;
+        padding-left: 5px;
+    ">100注</div>
+      <div class="red">1570</div>
+      <div class="flex-item text-dynamic">0</div>
+    </router-link> -->
+
+    <div class="mask hide">
+      <img src="img/mask.png">
+    </div>
+
+
+    <script>
+      (function() {
+        'use strict';
+
+        var imgs = document.querySelectorAll('.show-img');
+        var viewH = window.innerHeight; //屏幕高度
+        var scrollTop = 0; // 滚动距离
+        var offsetTops = []; //imgs的距顶距离
+        var btns = document.querySelectorAll('.btn-download');
+        var mask = document.querySelector('.mask'); //遮罩
+
+        init();
+
+        function init() {
+          for(var i = 0, len = imgs.length; i < len; i++) {
+            offsetTops.push(imgs[i].offsetTop);
+          }
+
+          regHandler();
+          compare();
+
+          // 如果是升级 进来后直接弹出下载框
+          if (getQueryParam('update') == 'y') {
+            appDown();
+
+            for (var i = 0, len = btns.length; i < len; i++) {
+              btns[i].setAttribute('disabled', true);
+            }
+
+            setTimeout(function() {
+              for (var i = 0, len = btns.length; i < len; i++) {
+                btns[i].removeAttribute('disabled');
+              }
+            }, 3000);
+          }
+        }
+
+        // 注册事件处理器
+        function regHandler() {
+          for (var i = 0, len = btns.length; i < len; i++) {
+            btns[i].addEventListener('click', function() {
+              appDown();
+
+            });
+          }
+
+          window.addEventListener('scroll', function(ev) {
+            compare();
+          })
+
+          mask.addEventListener('click', function(ev) {
+            this.classList.add('hide');
+          })
+        }
+
+        // 比较
+        function compare() {
+          scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
+          // console.log('scrollTop: ', scrollTop);
+          // 用当前滚动距离和img的距顶距离来比较
+          for(var i = 0, len = offsetTops.length; i < len; i++) {
+            if (scrollTop + viewH - 100 > offsetTops[i]) {
+              imgs[i].classList.add('move');
+            }
+          }
+        }
+        function appDown() {
+          var u = navigator.userAgent;
+          var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+          var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+          if(isiOS){
+            window.open( 'itms-services://?action=download-manifest&url=https://ssl.elile.xyz/download/down.plist',"_self")
+          }else if(isAndroid){
+            if (isWeChat()) {
+              mask.classList.remove('hide');
+            } else {
+              window.open('http://www.aiwanduo.com/static/download/apk/honghei-v1.0.6.apk', "_self");
+            }
+
+          }
+        }
+        function isWeChat() {
+          return /micromessenger/.test(navigator.userAgent.toLowerCase());
+        }
+
+        function getQueryParam (name) {
+          var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+          var r = window.location.search.substr(1).match(reg);
+          if (r != null) {
+            return unescape(r[2]);
+          }
+          return null;
+        }
+
+      })();
+
+    </script>
+  </body>
+</html>

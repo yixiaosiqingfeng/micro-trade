@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, height=device-height">
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <title></title>
+    <link rel="icon" href="/static/img/favicon.ico">
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="微盘">
+    <!-- Add to home screen for Windows -->
+    <meta name="msapplication-TileColor" content="#fc5155">
+
+    <link rel="stylesheet" type="text/css" href="https://at.alicdn.com/t/font_655359_awx24odeapw.css">
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <!-- APP loading页面 -->
+
+    <div id='loading' style='position: fixed; z-index: 1001; width: 100vw; height: 100vh; background-color: #ffffff; display: none; top:0;'>
+      <img style='width:100vw; position: fixed; z-index: 100; top: 50%; transform: translate(0, -50%);' src="/static/img/loading.png">
+    </div>
+
+    <script src="./static/common/vue.min.js"></script>
+    <script src="./static/common/vue-router.min.js"></script>
+    <script src="./static/common/vuex.min.js"></script>
+    <script src="./static/common/axios.min.js"></script>
+    <script src="./static/common/polyfill.js"></script>
+
+    <script type="text/javascript">
+               //loading页面 加载
+
+     if (!window.sessionStorage.getItem('inApp') && window.location.host) {
+        document.getElementById('loading').style.display = 'block';
+        // console.log(window.getComputedStyle(document.getElementById('loading'), null).display);
+      }
+
+               <!--在子页面返回上一页,双击点击返回退出程序,或者在首页点击返回退出程序-->
+               document.addEventListener('plusready', function() {
+                 var webview = plus.webview.currentWebview();
+                 plus.key.addEventListener('backbutton', function() {
+                   webview.canBack(function(e) {
+                     if(e.canBack) {
+                       webview.back();
+                     } else {
+                       //webview.close(); //hide,quit
+                       //plus.runtime.quit();
+                       //首页返回键处理
+                       //处理逻辑：1秒内，连续两次按返回键，则退出应用；
+                       var first = null;
+                       plus.key.addEventListener('backbutton', function() {
+                         //首次按键，提示‘再按一次退出应用’
+                         if (!first) {
+                           first = new Date().getTime();
+                           this.$toast('再按一次退出应用');
+                           setTimeout(function() {
+                             first = null;
+                           }, 1000);
+                         } else {
+                           if (new Date().getTime() - first < 1500) {
+                             plus.runtime.quit();
+                           }
+                         }
+                       }, false);
+                     }
+                   })
+                 });
+               });
+    </script>
+    <!-- built files will be auto injected -->
+  </body>
+</html>

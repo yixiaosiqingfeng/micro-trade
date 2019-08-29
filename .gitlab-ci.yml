@@ -1,0 +1,23 @@
+stages:
+    - deployTest
+    - deployProd
+deployTest:
+    stage: deployTest
+    script:
+        - cd /home/www-root/test.btcguangzhou.xyz/mt-tp.app/frontend/
+        - git pull
+        - npm install && npm run build
+        - cp -R /home/www-root/test.btcguangzhou.xyz/mt-tp.app/frontend/dist/* /home/www-root/test.btcguangzhou.xyz/mt-tp.app/app/
+    only:
+        - pre-production
+    tags:
+        - deploy
+deployProd:
+    stage: deployProd
+    script:
+        - update-git-repo -d micro-trade -s 47.75.12.218
+        - ssh root@47.75.12.218 'cd /home/www-data/micro-trade && npm install && npm run build'
+    only:
+        - production
+    tags:
+        - deploy  
